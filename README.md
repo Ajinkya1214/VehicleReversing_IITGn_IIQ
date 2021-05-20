@@ -30,7 +30,7 @@
   [Output video](https://drive.google.com/file/d/1LQa1HwsG1Zy99FlIjpyexHj5GHMzz9dD/view?usp=sharing)
   
 <p align="center">
-<img src="results/reversing_gif" alt="drawing"/ width="500" height="400">
+<img src="results/reversing.gif" alt="drawing"/ width="50" height="400">
 <br>As the truck in the input video starts to reverse, its label color changes from GREEN to RED 
 </div>
 </p>
