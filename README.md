@@ -21,7 +21,7 @@
     Hence we are required to design an alert system that will raise an alarm whenever reversing happens at the T-joint so that everyone is aware of the same, and hence safe.
 
 <p align="center">
-<img src="results/image.png" alt="drawing"/>
+<img src="results/image2.png" alt="drawing"/>
 <br>Camera View at T-joint
 </div>
 </p>
