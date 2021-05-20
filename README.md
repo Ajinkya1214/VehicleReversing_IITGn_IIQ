@@ -1,9 +1,11 @@
 # VehicleReversing_IITGn_IIQ
 
 
-* ## Instructions to run the reversing detector - >
+* ## Instructions to run the code
 
       python3 reversing_detector.py --video=truck_reversing.mp4 
+      or
+      python reversing_detector.py --video=truck_reversing.mp4 
 
    When reversing for some object is detected, color of label of that object changes from 
   <b> GREEN to RED. </b>
