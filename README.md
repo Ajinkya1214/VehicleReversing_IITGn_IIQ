@@ -26,6 +26,11 @@
 </div>
 </p>
 
+* ## Approach
+  * YOLO object detection algorithm to detect various types of objects in the frame and get centroid of each object in each frame.
+  * A centroid tracker algorithm to keep track of the centroid of each detected object.
+  * A heurestics based algorithm to device the type of motion (reversing / non-reversing) of each detected object based on the movement of its centroid.
+
 * ## Results:
   [Output video](https://drive.google.com/file/d/1LQa1HwsG1Zy99FlIjpyexHj5GHMzz9dD/view?usp=sharing)
   
