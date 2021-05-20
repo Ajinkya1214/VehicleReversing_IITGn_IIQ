@@ -20,3 +20,4 @@ To detect vehicle reversing at a T-junction and raise an alert signal if any hum
   2. Not multi-threaded, but can be done.
 
 * ## Future work:
+  Setting up an Alarm system, i.e. deploying the algorithm on some edge device.
