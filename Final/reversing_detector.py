@@ -5,6 +5,7 @@ import numpy as np
 import os.path
 from pyimagesearch.centroidtracker import CentroidTracker
 from collections import deque
+from playsound import playsound
 
 # Initialize the parameters
 confThreshold = 0.5  #Confidence threshold
@@ -121,8 +122,14 @@ def postprocess(frame,outs):
 	objects = ct.update(boxes)
 	# loop over the tracked objects
 	i = 0
+	flg = 0
 	for (objectID, centroid) in objects.items():
-		#draw the bounding box
+		if objectID in d3 and d3[objectID] == 3:
+			continue
+		if objectID in is_rev and is_rev[objectID] == 1 and flg == 0:
+			playsound('beep-06.mp3')
+			flg = 1 
+   		#draw the bounding box
 		if len(boxes) > i:
 			box = boxes[i]
 			i+=1
@@ -136,17 +143,21 @@ def postprocess(frame,outs):
 				d3[objectID] = 1
 			elif centroid[1]> frameHeight/3 and centroid[0] > 3*frameWidth/4:
 				d3[objectID] = 2
+			else :
+				d3[objectID] = 3 #ignorable object 
 		#if the object has moved out of the region of interest from where it was expected to reverse
 		#then ignore its further motion
 		if d3[objectID] == 1 or d3[objectID]==2: 
-			if centroid[1] < frameHeight/3 :
+			if centroid[1] < 6*frameHeight/25 :
+				print(centroid[1])
+				print('out of frame')
 				continue
 		if d3[objectID] == 0 :
 			if centroid[0] < frameWidth/4 or centroid[0] >3*frameWidth/4:
 				continue
 
 		dic[objectID].appendleft(centroid)
-		print(centroid)
+		# print(centroid)
 
 		nframes = 25
 		variance_limt1 = 100
@@ -158,8 +169,6 @@ def postprocess(frame,outs):
 			for i in range(nframes):
 				x.append(dic[objectID][i][0])
 				y.append(dic[objectID][i][1])
-			if objectID == 0:
-				print('xvar {} yvar {}'.format(np.var(x),np.var(y)))
 
 			if objectID not in d1:
 				d1[objectID] = [0,0,0,0]
@@ -180,12 +189,13 @@ def postprocess(frame,outs):
 					d1[objectID][1] +=1
 				else :
 					d1[objectID][1] -=1
-			else:
+			elif d3[objectID] == 2:
 				if cn[0] < c1[0]:
 						#drn = 'moving left'
 					d1[objectID][2] +=1
 				else :
 					d1[objectID][2] -=1
+				print(d1[objectID])
 
 			if objectID not in halted :
 				halted[objectID]= 0
@@ -194,25 +204,26 @@ def postprocess(frame,outs):
 				#observe the direction for 3 sets of 25 frames
 				#if the final direction after 3*25 = 75 frames was opposite to that before halting, then this could be reversing 
 				if d1[objectID][3] == 3 : 
-					if d2[objectID]*d1[objectID][d3[objectID]]<=0 and d2[objectID]>0: 
+					if d2[objectID]*d1[objectID][d3[objectID]]<=0 and d2[objectID]>0:
+						print(d2[objectID])
 						is_rev[objectID]=1
-					d1[objectID][3]= 0
+					else:
+						is_rev[objectID] = 0 
 					halted[objectID] = 0
+					d1[objectID][3] = 0
 				else :
-					d1[objectID][3]+=1
-				
-				
+					d1[objectID][3] +=1
 			if objectID in is_rev:
 				p1 = is_rev[objectID]
 			else :
 				p1 = 0
-			if objectID == 0:
-				print('rev {} drn {}'.format(p1,d1[objectID]))
+
 			if np.var(x) + np.var(y) < variance_limt1 and halted[objectID]== 0 :
-				# print(1)
+				print('halted')
 				halted[objectID]=1
 				d2[objectID] = d1[objectID][d3[objectID]]
 				d1[objectID] = [0,0,0,0] 
+				print('prev drn {}'.format(d2[objectID]))
 					
 					
 			for i in range(13):
@@ -224,7 +235,7 @@ def postprocess(frame,outs):
 		# object on the output frame
 		flag = 0
 		color = (0,255,0)
-		if objectID in is_rev:
+		if objectID in is_rev and is_rev[objectID]:
 			flag = 1
 			color = (0,0,255)
 		text = "ID {} Rev {}".format(objectID,flag)
