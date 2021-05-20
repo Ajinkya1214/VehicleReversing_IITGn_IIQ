@@ -13,6 +13,10 @@ To detect vehicle reversing at a T-junction and raise an alert signal if any hum
 * ## Pseudo Code for Centroid tracker:
 * ## Pseudo Code for Reversing detection
 * ## Results:
-  
+     As the truck starts to reverse, label changes from green to red </br>
+     [Output video](https://drive.google.com/file/d/1LQa1HwsG1Zy99FlIjpyexHj5GHMzz9dD/view?usp=sharing)
 * ## Limitations:
+  1. Between the previous halt and the next halt, if there are not enough sets of n frames, then we might not be able to calculate the correct direction of the object before the next halt.
+  2. Not multi-threaded, but can be done.
+
 * ## Future work:
