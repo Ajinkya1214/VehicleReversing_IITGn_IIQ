@@ -134,8 +134,16 @@ def postprocess(frame,outs):
 				d3[objectID] = 0
 			elif centroid[1]> frameHeight/3 and centroid[0] < frameWidth/4:
 				d3[objectID] = 1
-			else:
+			elif centroid[1]> frameHeight/3 and centroid[0] > 3*frameWidth/4:
 				d3[objectID] = 2
+		#if the object has moved out of the region of interest from where it was expected to reverse
+		#then ignore its further motion
+		if d3[objectID] == 1 or d3[objectID]==2: 
+			if centroid[1] < frameHeight/3 :
+				continue
+		if d3[objectID] == 0 :
+			if centroid[0] < frameWidth/4 or centroid[0] >3*frameWidth/4:
+				continue
 
 		dic[objectID].appendleft(centroid)
 		print(centroid)
@@ -294,10 +302,6 @@ while cv.waitKey(1) < 0:
 		vid_writer.write(frame.astype(np.uint8))
 
 	cv.imshow(winName, frame)
-
-
-
-
 
 
 
