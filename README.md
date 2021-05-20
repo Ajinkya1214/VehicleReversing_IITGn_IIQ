@@ -9,7 +9,7 @@
   <b> GREEN to RED. </b>
 
 * ## Requirements:
-  Python 3 --version 3.7 </br>
+  Python 3 --version 3.8 </br>
   playsound module
   
 * ## Problem Statement:
