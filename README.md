@@ -18,10 +18,7 @@
     
     Hence we are required to design an alert system that will raise an alarm whenever reversing happens at the T-joint so that everyone is aware of the same, and hence safe.
 
-* ## Approach
-     * YOLO object detection algorithm to detect a truck or multiple trucks.
-     * A centroid tracker algorithm to keep track of centroid of each detected object.
-     * A heuristics based motion detection algorithm to understand the type of motion of each object - reversing/not reversing.
+ 
 * ## Results:
      As the truck in the input video starts to reverse, its label color changes from GREEN to RED </br>
            [Output video](https://drive.google.com/file/d/1LQa1HwsG1Zy99FlIjpyexHj5GHMzz9dD/view?usp=sharing)
