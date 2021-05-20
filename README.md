@@ -27,8 +27,14 @@
 </p>
 
 * ## Results:
-     As the truck in the input video starts to reverse, its label color changes from GREEN to RED </br>
-           [Output video](https://drive.google.com/file/d/1LQa1HwsG1Zy99FlIjpyexHj5GHMzz9dD/view?usp=sharing)
+  [Output video](https://drive.google.com/file/d/1LQa1HwsG1Zy99FlIjpyexHj5GHMzz9dD/view?usp=sharing)
+  
+<p align="center">
+<img src="results/reversing_gif" alt="drawing"/ width="500" height="400">
+<br>As the truck in the input video starts to reverse, its label color changes from GREEN to RED 
+</div>
+</p>
+
  
 * ## Advantages of the algorithm:
   * Can detect truck reversing for trucks coming from the front, left or right, essentially for all possible directions. </br>
