@@ -207,7 +207,7 @@ def postprocess(frame,outs):
 					if d2[objectID]*d1[objectID][d3[objectID]]<=0 and d2[objectID]>0:
 						print(d2[objectID])
 						is_rev[objectID]=1
-					else:
+					elif d2[objectID]*d1[objectID][d3[objectID]]<=0 and d2[objectID]<0:
 						is_rev[objectID] = 0 
 					halted[objectID] = 0
 					d1[objectID][3] = 0
@@ -313,6 +313,5 @@ while cv.waitKey(1) < 0:
 		vid_writer.write(frame.astype(np.uint8))
 
 	cv.imshow(winName, frame)
-
 
 
